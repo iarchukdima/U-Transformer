@@ -1,0 +1,30 @@
+model_type: u_transformer
+data:
+  source: file
+  wiki_config: 20220301.en
+  streaming: true
+  max_seq_len: 512
+  train_split: 0.95
+optim:
+  lr: 3.0e-4
+  warmup_steps: 200
+train:
+  batch_size: 32
+  grad_accum_steps: 1
+  epochs: 2
+  steps_per_epoch: 2000
+  val_batches: 200
+  eval_interval: 200
+tokenizer:
+  type: hf
+  hf_name: gpt2
+u:
+  stages: [384, 256, 160]
+  blocks_per_stage: [4, 4, 8]
+  n_heads_base: 8
+  head_dim: 64
+  head_strategy: constant_heads
+  dropout: 0.0
+  downsample_factor: 2
+  use_skips: true
+

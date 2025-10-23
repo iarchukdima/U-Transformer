@@ -1,0 +1,35 @@
+model_type: gpt
+data:
+  source: file
+  wiki_config: 20220301.en
+  streaming: true
+  max_seq_len: 512
+  train_split: 0.95
+optim:
+  lr: 5.0e-5
+  warmup_steps: 1500
+  betas: [0.9, 0.999]
+  weight_decay: 0.05
+train:
+  batch_size: 32
+  grad_accum_steps: 1
+  epochs: 2
+  steps_per_epoch: 2000
+  val_batches: 200
+  eval_interval: 200
+  grad_clip: 1.0
+  scheduler: plateau
+  plateau_factor: 0.5
+  plateau_patience: 3
+  early_stop_patience: 8
+  label_smoothing: 0.1
+tokenizer:
+  type: hf
+  hf_name: gpt2
+gpt:
+  n_layers: 8
+  n_heads: 8
+  embed_dim: 512
+  mlp_ratio: 4.0
+  dropout: 0.2
+  tie_weights: true
